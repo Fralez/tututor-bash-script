@@ -37,7 +37,35 @@ menu_usuarios_db() {
 }
 
 create_user() {
+    echo "Ingrese su email"
+    read email
     
+    echo "Ingrese su contraseña"
+    read password
+    
+    echo "Ingrese su cédula"
+    read identity_number
+    
+    echo "Ingrese su nombre"
+    read name
+    
+    echo "Indique su género seleccionando un número"
+    echo "1 - Hombre"
+    echo "2 - Mujer"
+    echo "0 - Otro"
+    read gender
+    
+    echo "Ingrese su fecha de nacimiento"
+    read birth_date
+
+    req_json='{ "user": { "email": "'$email'", "password": "'$password'", "identity_number": "'"$identity_number"'", "name": "'$name'", "gender": '"$gender"', "birth_date": "'"$birth_date"'" } }'
+    echo $req_json
+    response=$(curl -XPOST -H "Content-type: application/json" -s -d $req_json -o - 'http://localhost:3000/users')
+
+    echo "El servidor ha respondido con lo siguiente:"
+    echo
+    echo
+    echo $response
 }
 
 menu_usuarios_db
