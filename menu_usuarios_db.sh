@@ -55,12 +55,11 @@ create_user() {
     echo "0 - Otro"
     read gender
     
-    echo "Ingrese su fecha de nacimiento"
+    echo "Ingrese su fecha de nacimiento con formato AÑO-MES-DIA (ejemplo: 2003-08-25)"
     read birth_date
 
     req_json='{ "user": { "email": "'$email'", "password": "'$password'", "identity_number": "'"$identity_number"'", "name": "'$name'", "gender": '"$gender"', "birth_date": "'"$birth_date"'" } }'
-    echo $req_json
-    response=$(curl -XPOST -H "Content-type: application/json" -d "$req_json" -s 'http://localhost:3000/users')
+    response=$(curl -XPOST -H "Content-type: application/json" -d "$req_json" -s 'https://tututor-backend.herokuapp.com/users')
 
     echo "El servidor ha respondido con lo siguiente:"
     echo
